@@ -11,3 +11,12 @@ async def getUsers():
     except Exception as e:
         error_message = str(e)
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=error_message)
+
+
+@router.post('/')
+async def setUser():
+    try:
+        return await userRepository.setUser()
+    except Exception as e:
+        error_message = str(e)
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=error_message)

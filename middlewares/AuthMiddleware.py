@@ -1,6 +1,7 @@
 from fastapi import Request, HTTPException
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import JSONResponse
+from services import JwtService
 
 class AuthMiddleware(BaseHTTPMiddleware):
     def __init__(self, app):
@@ -12,10 +13,14 @@ class AuthMiddleware(BaseHTTPMiddleware):
             if request.url.path in self.excluded_paths:
                 return await call_next(request)
 
-            token = request.headers.get("Authorization")
+            # token = request.headers.get("Authorization")
+
+            jwtService = JwtService()
+            jwtService.verifyToken(request)
+
             # aqui tem que chamar a classe jwtservice para tentar validar o token
-            if not token or token != "Bearer meu_token_secreto":
-                raise HTTPException(status_code=401, detail="Não autorizado")
+            # if not token or token != "Bearer meu_token_secreto":
+                # raise HTTPException(status_code=401, detail="Não autorizado")
 
             return await call_next(request)
 

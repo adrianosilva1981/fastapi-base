@@ -11,3 +11,12 @@ async def getUsers():
     query = 'SELECT * FROM users'
     columns, users = await db.execute_query(query)
     return mapToJson(users, columns)
+
+
+async def setUser():
+    db = ConnectionService()
+    await db.connect()
+
+    query = 'INSERT INTO...'
+    columns, users = await db.execute_query(query)
+    return mapToJson(users, columns)
