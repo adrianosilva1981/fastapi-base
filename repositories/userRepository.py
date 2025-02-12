@@ -1,11 +1,11 @@
-from services.ConnectionService import Connection
+from services.ConnectionService import ConnectionService
 from utils.mapToJson import mapToJson
 from dotenv import load_dotenv
 
 load_dotenv()
 
 async def getUsers():
-    db = Connection()
+    db = ConnectionService()
     await db.connect()
 
     query = 'SELECT * FROM users'
