@@ -1,2 +1,3 @@
-from .indexRouter import router as index_router
-from .userRoute import router as user_router
+from .index_router import index_router
+from .auth_router import auth_router
+from .user_router import user_router

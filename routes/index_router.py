@@ -2,11 +2,11 @@ from fastapi import APIRouter
 from dotenv import load_dotenv
 import os
 
-router = APIRouter()
+index_router  = APIRouter()
 
 load_dotenv()
 
-@router.get('/')
+@index_router.get('/')
 async def healthcheck():
     return {
         "name": os.getenv('APP_NAME'),

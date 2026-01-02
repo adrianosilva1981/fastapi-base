@@ -1,13 +1,17 @@
 from fastapi import FastAPI
 from routes import index_router
-from routes import user_router
-from middlewares.AuthMiddleware import AuthMiddleware
+from routes import auth_router, user_router
+from middlewares.auth_middleware import AuthContextMiddleware
+from middlewares.user_middleware import UserContextMiddleware
+
 
 app = FastAPI()
 
-app.add_middleware(AuthMiddleware)
+app.add_middleware(AuthContextMiddleware)
+app.add_middleware(UserContextMiddleware)
 
 app.include_router(index_router, prefix="", tags=["Index"])
+app.include_router(auth_router, prefix="/auth", tags=["Auth"])
 app.include_router(user_router, prefix="/users", tags=["Users"])
 
 if __name__ == '__main__':
